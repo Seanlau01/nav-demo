@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>快捷桌面</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header></header>
+    <main>  
+      <div class="wrapper" id="mainXXXX"></div>
+</main>
+    <footer></footer>
+    <script>
+      keys={
+         '0': {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+         '1': {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
+         '2': {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
+         'length':3
+     }
+     hash = {
+         'q':'qq.com',
+         'w':'weibo.com',
+         'e':'ebay.com',
+         'r':'baidu.com',
+         't':'tencent.com'
+     }
+     //取出localStorage中的uuu对应的hash
+      hashInlocalStorage=JSON.parse(localStorage.getItem('uuu')||'null')
+     if(hashInlocalStorage){
+         hash=hashInlocalStorage
+     }
+     //遍历keys，生成kbd便签
+     index=0
+     while(index<keys['length']){ // 0 1 2
+       divXXXX=document.createElement('div')
+       mainXXXX.appendChild(divXXXX)
+       row=keys[index] //第一个数组 第二个数组 第三个数组
+       index2=0
+         while(index2<row['length']){   //0-9  0-8  0-6
+         kbdXXXX=document.createElement('kbd')
+         kbdXXXX.textContent=row[index2]
+         buttonX=document.createElement('button')
+         buttonX.textContent='编辑'
+         buttonX.id=row[index2]
+         buttonX.onclick=function(zzz){
+            key=(zzz['target']['id'])//qwert
+            x=prompt('给我一个网址') 
+            hash[key]=x // hash变更
+            localStorage.setItem('uuu',JSON.stringify(hash)) 
+            console.log(hash)
+         }
+         kbdXXXX.appendChild(buttonX)
+         divXXXX.appendChild(kbdXXXX)
+         index2=index2+1
+        }
+     index=index+1
+    }
+     document.onkeypress=function(zzz){
+        key=console.log(zzz['key'])// q w e
+        website=hash[key]
+        console.log(website)
+        //location.href='http://'+website
+        window.open('http://'+website, '_blank')
+     }
+    
+    </script>
+</body>
+</html>
