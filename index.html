@@ -1,68 +1,73 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>快捷桌面</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>键盘导航</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header></header>
-    <main>  
-      <div class="wrapper" id="main1"></div>
-</main>
-    <footer></footer>
+    <main class="main1" id="main1">
+    </main>
     <script>
-      keys={
-         '0': {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
-         '1': {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
-         '2': {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
-         'length':3
-     }
-     hash = {
-         'q':'qq.com',
-         'w':'weibo.com',
-         'e':'ebay.com',
-         'r':'baidu.com',
-         't':'tencent.com'
-     }
-     //取出localStorage中的uuu对应的hash
-      hashInlocalStorage=JSON.parse(localStorage.getItem('uuu')||'null')
-     if(hashInlocalStorage){
-         hash=hashInlocalStorage
-     }
-     //遍历keys，生成kbd便签
-     index=0
-     while(index<keys['length']){ // 0 1 2
-       div1=document.createElement('div')
-       main1.appendChild(div1)
-       row=keys[index] //第一个数组 第二个数组 第三个数组
-       index2=0
-         while(index2<row['length']){   //0-9  0-8  0-6
-         kbd1=document.createElement('kbd')
-         kbd1.textContent=row[index2]
-         button1=document.createElement('button')
-         button1.textContent='编辑'
-         button1.id=row[index2]
-         button1.onclick=function(zzz){
-            key=(zzz['target']['id'])//qwert
-            x=prompt('给我一个网址') 
-            hash[key]=x // hash变更
-            localStorage.setItem('uuu',JSON.stringify(hash)) 
-            console.log(hash)
-         }
-         kbd1.appendChild(button1)
-         div1.appendChild(kbd1)
-         index2=index2+1
+       keys={
+           0:['q','w','e','r','t','y','u','i','o','p'],
+           1:['a','s','d','f','g','h','j','k','l'],
+           2:['z','x','c','v','b','n','m'],
+           length:3
+       }
+       hash={
+           q:'qq.com',
+           w:'weibo.com',
+           e:'ele.me',
+           r:undefined,
+           t:'twitter.com',
+           y:'youtube.com',
+           u:undefined,
+           i:'iqiyi.com',
+           o:undefined,
+           p:undefined,
+           a:'alibaba.com',
+           s:'souhu.com',
+           d:undefined
+
+       }
+       hashInLocalStorage=JSON.parse(localStorage.getItem('savedata')||'null')
+       if(hashInLocalStorage){
+           hash=hashInLocalStorage  //如果hashInLoaclStorage存在则覆盖之前的hash
+       }
+       index=0
+       while(index<keys['length']){// 0 1 2
+         row=keys[index] //第一个数组  第二个数组  第三个数组
+         div1=document.createElement('div')
+         main1.appendChild(div1)
+         index2=0
+         while(index2<row['length']){
+            kbd1=document.createElement('kbd')
+            kbd1.textContent=row[index2] 
+            div1.appendChild(kbd1)
+            btn1=document.createElement('button')
+            btn1.textContent='编辑'
+            kbd1.appendChild(btn1)
+             
+            btn1.id=row[index2]
+            btn1.onclick=function(event2){
+               key=event2['target']['id']
+                webinput=prompt('给我一个网址')
+                hash[key]=webinput
+                localStorage.setItem('savedata',JSON.stringify(hash)) //变更存档
+            }
+             
+            index2+=1
         }
-     index=index+1
-    }
-     document.onkeypress=function(zzz){
-        key=zzz['key']// q w e
-        website=hash[key]
-        window.open('http://'+website, '_blank')
-     }
+        index+=1
+       }
+       document.onkeypress=function(event1){
+            key=event1['key']
+            website=hash[key]
+            window.open('http://'+website,'_blank')
+        }   
     </script>
 </body>
 </html>
