@@ -10,7 +10,7 @@
 <body>
     <header></header>
     <main>  
-      <div class="wrapper" id="mainXXXX"></div>
+      <div class="wrapper" id="main1"></div>
 </main>
     <footer></footer>
     <script>
@@ -35,37 +35,34 @@
      //遍历keys，生成kbd便签
      index=0
      while(index<keys['length']){ // 0 1 2
-       divXXXX=document.createElement('div')
-       mainXXXX.appendChild(divXXXX)
+       div1=document.createElement('div')
+       main1.appendChild(div1)
        row=keys[index] //第一个数组 第二个数组 第三个数组
        index2=0
          while(index2<row['length']){   //0-9  0-8  0-6
-         kbdXXXX=document.createElement('kbd')
-         kbdXXXX.textContent=row[index2]
-         buttonX=document.createElement('button')
-         buttonX.textContent='编辑'
-         buttonX.id=row[index2]
-         buttonX.onclick=function(zzz){
+         kbd1=document.createElement('kbd')
+         kbd1.textContent=row[index2]
+         button1=document.createElement('button')
+         button1.textContent='编辑'
+         button1.id=row[index2]
+         button1.onclick=function(zzz){
             key=(zzz['target']['id'])//qwert
             x=prompt('给我一个网址') 
             hash[key]=x // hash变更
             localStorage.setItem('uuu',JSON.stringify(hash)) 
             console.log(hash)
          }
-         kbdXXXX.appendChild(buttonX)
-         divXXXX.appendChild(kbdXXXX)
+         kbd1.appendChild(button1)
+         div1.appendChild(kbd1)
          index2=index2+1
         }
      index=index+1
     }
      document.onkeypress=function(zzz){
-        key=console.log(zzz['key'])// q w e
+        key=zzz['key']// q w e
         website=hash[key]
-        console.log(website)
-        //location.href='http://'+website
         window.open('http://'+website, '_blank')
      }
-    
     </script>
 </body>
 </html>
