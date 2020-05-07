@@ -18,12 +18,12 @@ kbd{border:1px solid red;
 main{
     text-align: center;
 }
-#mainXXXX{
+#main1{
     display:inline-block;;
 }
-#mainXXXX>div:nth-child(2){
+#main1>div:nth-child(2){
     margin-left:2em;
 }
-#mainXXXX>div:nth-child(3){
+#main1>div:nth-child(3){
     margin-left: 4em;
 }
